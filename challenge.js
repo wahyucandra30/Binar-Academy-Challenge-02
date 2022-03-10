@@ -36,9 +36,9 @@ console.log(checkTypeNumber());
 function checkEmail(email) {
     var regEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     try {
-        if (!email) throw "Error: No arguments";
-        if (typeof (email) !== "string") throw "Error: Invalid data type.";
-        if (!email.includes("@")) throw "Error: '@' Symbol not found"
+        if (!email) throw "Error: Error: No arguments passed to function.";
+        if (typeof (email) !== "string") throw "Error: Invalid data type";
+        if (!email.includes("@")) throw "Error: '@' Symbol not found";
         return regEmail.test(email) ? "VALID" : "INVALID";
     }
     catch (error) {
@@ -57,8 +57,8 @@ console.log(checkEmail());
 //#region Nomor 4
 function isValidPassword(givenPassword) {
     try {
-        if (givenPassword == undefined) throw "Error: No arguments";
-        if (typeof (givenPassword) !== "string") throw "Error: Invalid data type. String required";
+        if (givenPassword == undefined) throw "Error: No arguments passed to function.";
+        if (typeof (givenPassword) !== "string") throw "Error: Invalid argument. String required";
 
         const uppercaseCheck = givenPassword.toUpperCase();
         const lowercaseCheck = givenPassword.toLowerCase();
@@ -92,13 +92,13 @@ console.log(isValidPassword());
 //#region Nomor 5
 function getSplitName(personName) {
     try {
-        if (personName === undefined) throw "Error: No arguments";
-        if (typeof (personName) !== "string") throw "Error: Invalid data type. String required";
+        if (personName === undefined) throw "Error: No arguments passed to function.";
+        if (typeof (personName) !== "string") throw "Error: Invalid argument. String required.";
         const nameArray = personName.split(" ");
         if (nameArray.length > 3) throw "Error: This function is only for 3 character name";
 
         const keysArray = ["firstName", "middleName", "lastName"];
-        return keysArray.reduce((acc, curr, index) => 
+        return keysArray.reduce((acc, curr, index) =>
             (acc[curr] = nameArray[index] ? nameArray[index] : null, acc), {});
     }
     catch (error) {
@@ -112,4 +112,32 @@ console.log(getSplitName("Dwi Kuncoro"));
 console.log(getSplitName("Aurora"));
 console.log(getSplitName("Aurora Aureliya Sukma Darma"));
 console.log(getSplitName(0));
+//#endregion
+
+//#region Nomor 6
+console.log('\u001b[' + 32 + 'm' + '\nNomor 6' + '\u001b[0m');
+
+function getAngkaTerbesarKedua(dataNumbers) {
+    try {
+        if (dataNumbers === undefined) throw "Error: No arguments passed to function.";
+        if (!Array.isArray(dataNumbers)) throw "Error: Invalid argument. Array required.";
+
+        let max = Math.max(...dataNumbers);
+        const tempArr = dataNumbers.map(num => num === max ? -Infinity : num);
+
+        return Math.max(...tempArr);
+    }
+    catch (error) {
+        return error;
+    }
+}
+const dataAngka = [9, 4, 7, 7, 4, 3, 2, 2, 8];
+
+console.log(getAngkaTerbesarKedua(dataAngka));
+console.log(getAngkaTerbesarKedua(0));
+console.log(getAngkaTerbesarKedua());
+//#endregion
+
+//#region Nomor 7
+
 //#endregion
