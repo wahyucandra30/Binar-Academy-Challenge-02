@@ -7,7 +7,7 @@ function changeWord(selectedText, changedText, text) {
 const kalimat1 = 'Andini sangat mencintai kamu selamanya';
 const kalimat2 = 'Gunung Bromo tak akan mampu menggambarkan besarnya cintaku padamu';
 
-console.log('\u001b[' + 32 + 'm' + '\nNomor 1' + '\u001b[0m');
+console.log(`\u001b[${32}m \nNomor 1\u001b[0m`);
 console.log(changeWord('mencintai', 'membenci', kalimat1));
 console.log(changeWord('bromo', 'semeru', kalimat2));
 //#endregion
@@ -23,7 +23,7 @@ const checkTypeNumber = givenNumber => {
         return error;
     }
 }
-console.log('\u001b[' + 32 + 'm' + '\nNomor 2' + '\u001b[0m');
+console.log(`\u001b[${32}m \nNomor 2\u001b[0m`);
 console.log(checkTypeNumber(10));
 console.log(checkTypeNumber(3));
 console.log(checkTypeNumber("3"));
@@ -45,7 +45,7 @@ function checkEmail(email) {
         return error;
     }
 }
-console.log('\u001b[' + 32 + 'm' + '\nNomor 3' + '\u001b[0m');
+console.log(`\u001b[${32}m \nNomor 3\u001b[0m`);
 console.log(checkEmail('apranata@binar.co.id'));
 console.log(checkEmail('apranata@binar.com'));
 console.log(checkEmail('apranata@binar'));
@@ -80,7 +80,7 @@ function isValidPassword(givenPassword) {
         return error;
     }
 }
-console.log('\u001b[' + 32 + 'm' + '\nNomor 4' + '\u001b[0m');
+console.log(`\u001b[${32}m \nNomor 4\u001b[0m`);
 console.log(isValidPassword('Meong2021'));
 console.log(isValidPassword('meong2021'));
 console.log(isValidPassword('@eong'));
@@ -106,7 +106,7 @@ function getSplitName(personName) {
     }
 }
 
-console.log('\u001b[' + 32 + 'm' + '\nNomor 5' + '\u001b[0m');
+console.log(`\u001b[${32}m \nNomor 5\u001b[0m`);
 console.log(getSplitName("Aldi Daniela Pranata"));
 console.log(getSplitName("Dwi Kuncoro"));
 console.log(getSplitName("Aurora"));
@@ -115,7 +115,7 @@ console.log(getSplitName(0));
 //#endregion
 
 //#region Nomor 6
-console.log('\u001b[' + 32 + 'm' + '\nNomor 6' + '\u001b[0m');
+console.log(`\u001b[${32}m \nNomor 6\u001b[0m`);
 
 function getAngkaTerbesarKedua(dataNumbers) {
     try {
@@ -139,5 +139,44 @@ console.log(getAngkaTerbesarKedua());
 //#endregion
 
 //#region Nomor 7
+const dataPenjualanPakAldi = [
+    {
+        namaProduct: 'Sepatu Futsal Nike Vapor Academy 8',
+        hargaSatuan: 760000,
+        kategori: "Sepatu Sport",
+        totalTerjual: 90,
+    },
+    {
+        namaProduct: 'Sepatu Warrior Tristan Black Brown High',
+        hargaSatuan: 960000,
+        kategori: "Sepatu Sneaker",
+        totalTerjual: 37,
+    },
+    {
+        namaProduct: 'Sepatu Warrior Tristan Maroon High ',
+        kategori: "Sepatu Sneaker",
+        hargaSatuan: 360000,
+        totalTerjual: 90,
+    },
+    {
+        namaProduct: 'Sepatu Warrior Rainbow Tosca Corduroy',
+        hargaSatuan: 120000,
+        kategori: "Sepatu Sneaker",
+        totalTerjual: 90,
+    }
+]
+function hitungTotalPenjualan(dataPenjualan) {
+    try {
+        if (dataPenjualan === undefined) throw "Error: No arguments passed to function.";
+        if (!Array.isArray(dataPenjualan)) throw "Error: Invalid argument. Array required.";
 
+        return dataPenjualan.reduce((acc, curr) => acc + curr.totalTerjual, 0);
+    }
+    catch (error) {
+        return error;
+    }
+
+}
+console.log(`\u001b[${32}m \nNomor 7\u001b[0m`);
+console.log(hitungTotalPenjualan(dataPenjualanPakAldi));
 //#endregion
