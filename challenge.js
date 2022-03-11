@@ -1,6 +1,6 @@
 //#region Nomor 1
 function changeWord(selectedText, changedText, text) {
-    let searchMask = new RegExp(selectedText, "ig");
+    const searchMask = new RegExp(selectedText, "ig");
     return text.replace(searchMask, changedText);
 }
 
