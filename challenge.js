@@ -175,8 +175,103 @@ function hitungTotalPenjualan(dataPenjualan) {
     catch (error) {
         return error;
     }
-
 }
 console.log(`\u001b[${32}m \nNomor 7\u001b[0m`);
 console.log(hitungTotalPenjualan(dataPenjualanPakAldi));
+//#endregion
+
+//#region Nomor 8
+const dataPenjualanNovel = [
+    {
+        idProduct: 'BOOK002421',
+        namaProduk: 'Pulang - Pergi',
+        penulis: 'Tere Liye',
+        hargaBeli: 60000,
+        hargaJual: 86000,
+        totalTerjual: 150,
+        sisaStok: 17,
+    },
+    {
+        idProduct: 'BOOK002351',
+        namaProduk: 'Selamat Tinggal',
+        penulis: 'Tere Liye',
+        hargaBeli: 75000,
+        hargaJual: 103000,
+        totalTerjual: 171,
+        sisaStok: 20,
+    },
+    {
+        idProduct: 'BOOK002941',
+        namaProduk: 'Garis Waktu',
+        penulis: 'Fiersa Besari',
+        hargaBeli: 67000,
+        hargaJual: 99000,
+        totalTerjual: 213,
+        sisaStok: 5,
+    },
+    {
+        idProduct: 'BOOK002941',
+        namaProduk: 'Laskar Pelangi',
+        penulis: 'Andrea Hirata',
+        hargaBeli: 55000,
+        hargaJual: 68000,
+        totalTerjual: 20,
+        sisaStok: 56,
+    },
+];
+
+//Saya masukkan ke dalam satu function semua kode nya karena di soal disuruh begitu
+function getInfoPenjualan(dataPenjualan) {
+    try {
+        if (dataPenjualan === undefined) throw "Error: No arguments passed to function.";
+        if (!Array.isArray(dataPenjualan)) throw "Error: Invalid argument. Array required.";
+
+        const profit = dataPenjualan.reduce((acc, curr) => acc +
+            (curr.hargaJual * curr.totalTerjual - curr.hargaBeli * curr.totalTerjual), 0);
+        const modal = dataPenjualan.reduce((acc, curr) => acc +
+            curr.hargaBeli * (curr.sisaStok + curr.totalTerjual), 0);
+        const maxSaleCount = Math.max(...dataPenjualan.map(item => item.totalTerjual));
+        const bestSeller = dataPenjualan.filter(item =>
+            item.totalTerjual === maxSaleCount).map(item => item.namaProduk);
+
+        const writerArray = dataPenjualan.map(item => item.penulis).filter((item, index, arr) =>
+            arr.indexOf(item) === index);
+        const salesByWriters = writerArray.reduce((acc, curr) =>
+        (acc[curr] = dataPenjualan.map(item => item.penulis == curr ? item.totalTerjual : null)
+            .reduce(((acc, curr) => acc + curr), 0), acc), {});
+
+        const bestWriter = Object.keys(salesByWriters)
+            .find(item => salesByWriters[item] === Math.max(...Object.values(salesByWriters)));
+
+        function formatRupiah(number) {
+            let arr = number.toString().split('');
+            const len = arr.length;
+            let j = 0;
+            for (i = len - 1; i > 0; i--) {
+                j++;
+                if (j === 3) {
+                    arr.splice(i, 0, '.');
+                    j = 0;
+                };
+            }
+            arr.unshift("Rp. ");
+            return arr.join("");
+        }
+
+        const formatPercentage = number => `${number.toFixed(1)}%`;
+
+        return {
+            totalKeuntungan: formatRupiah(profit),
+            totalModal: formatRupiah(modal),
+            presentaseKeuntungan: formatPercentage(profit / modal * 100),
+            produkBukuTerlaris: bestSeller.toString(),
+            penulisTerlaris: bestWriter
+        };
+    }
+    catch (error) {
+        return error;
+    }
+}
+console.log(`\u001b[${32}m \nNomor 8\u001b[0m`);
+console.log(getInfoPenjualan(dataPenjualanNovel));
 //#endregion
